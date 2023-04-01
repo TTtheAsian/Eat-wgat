@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>想幹啥都說</title>
+    <style>
+      body {
+        background-color: #f2f2f2;
+        color: #333;
+        font-family: Arial, sans-serif;
+      }
+      
+      h1 {
+        margin-top: 0;
+      }
+      
+      label {
+        font-size: 20px;
+      }
+      
+      input[type="text"], select {
+        font-size: 18px;
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        margin-bottom: 10px;
+      }
+      
+      button {
+        font-size: 18px;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        background-color: #444;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      
+      button:hover {
+        background-color: #333;
+      }
+      
+      #result {
+        border: 1px solid #444;
+        padding: 10px;
+        display: inline-block;
+        font-size: 32px;
+        margin-top: 10px;
+      }
+    </style>
+    <script>
+      function addOption() {
+        var text = document.getElementById("text").value.trim();
+        if (text !== '') {
+          var option = document.createElement("option");
+          option.text = text;
+          document.getElementById("options").add(option);
+          document.getElementById("text").value = '';
+        }
+      }
+      
+      function chooseOption() {
+        var options = document.getElementById("options");
+        if (options.length > 0) {
+          var index = Math.floor(Math.random() * options.length);
+          var chosenOption = options.options[index].text;
+          var result = document.getElementById("result");
+          result.innerHTML = chosenOption;
+        }
+      }
+      
+      function handleKeyPress(event) {
+        if (event.keyCode === 13) {
+          addOption();
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>隨機選擇文字</h1>
+    <label>請輸入文字：</label>
+    <br>
+    <input type="text" id="text" onkeypress="handleKeyPress(event)">
+    <button onclick="addOption()">確認</button>
+    <br>
+    <label>請選擇：</label>
+    <br>
+    <select id="options" multiple></select>
+    <br>
+    <button onclick="chooseOption()">開始</button>
+    <div id="result"></div>
+  </body>
+</html>
